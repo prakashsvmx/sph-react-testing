@@ -1,11 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Increment from "components/counter";
 
 function App() {
   return (
     <div className="App">
      <h1>Hello world !</h1>
+        <Increment />
     </div>
   );
 }

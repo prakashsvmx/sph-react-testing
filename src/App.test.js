@@ -14,8 +14,31 @@ Enzyme.configure({
 //No Snapshot testing.
 //
 //it or test can be used.
-test('renders without crashing', () => {
+//Test suite must contain atleast one test.
+/*test('renders without crashing', () => {
  const wrapper = shallow(<App/>);
  expect(wrapper).toBeTruthy();
  // console.log(wrapper.debug())
+});*/
+
+
+test('Renders without error', ()=>{
+
+});
+
+test('Renders increment button', ()=>{
+
+});
+
+test('Renders Counter display', ()=>{
+
+});
+
+test('Renders Counter at 0', ()=>{
+
+});
+
+
+test('Clicking button increments Counter display', ()=>{
+
 });
