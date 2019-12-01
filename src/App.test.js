@@ -1,9 +1,21 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import App from './App';
 
-it('renders without crashing', () => {
-  const div = document.createElement('div');
-  ReactDOM.render(<App />, div);
-  ReactDOM.unmountComponentAtNode(div);
+import Enzyme, {shallow} from 'enzyme';
+import EnzymeAdapter from 'enzyme-adapter-react-16';
+
+Enzyme.configure({
+  adapter: new EnzymeAdapter()
+});
+
+// npm install --save-dev enzyme jest-enzyme enzyme-adapter-react-16
+//Test the behaviour not the implementation
+//Find Balance b/w Unit and integration testing.
+//No Snapshot testing.
+//
+//it or test can be used.
+test('renders without crashing', () => {
+ const wrapper = shallow(<App/>);
+ expect(wrapper).toBeTruthy();
+ // console.log(wrapper.debug())
 });
