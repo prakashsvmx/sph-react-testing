@@ -25,7 +25,11 @@ Enzyme.configure({
  * @returns {ShallowWrappr}
  */
 const setUp = (props={}, state=null)=>{
-    return shallow(<Increment {...props}/>);
+    const wrapper =shallow(<Increment {...props}/>);
+    if(state){
+        wrapper.setState(state)
+    }
+    return wrapper;
 }
 
 /**
@@ -62,10 +66,17 @@ test('Renders Counter display', ()=>{
 });
 
 test('Renders Counter at 0', ()=>{
-
+    const wrapper = setUp();
+    const initialCounterState = wrapper.state('counter');
+    expect(initialCounterState).toBe(0);
 });
 
 
 test('Clicking button increments Counter display', ()=>{
-
+    const counter=7;
+    const wrapper = setUp(null, {counter});
+    const btn= findByTestAttr(wrapper, 'btn-increment');
+    btn.simulate('click');
+    const displayValue = findByTestAttr(wrapper,'counter-display');
+    expect(displayValue.text()).toContain(counter+1);
 });
