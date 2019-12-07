@@ -17,19 +17,39 @@ Enzyme.configure({
 //Babel plugin to remove the properties of html elements.
 // npm install --save-dev babel-plugin-react-remove-properties
 
+/**
+ * This is a factory funciton to create a shallow wrapper component.
+ * @funciton setUp
+ * @param {object} props - Component Props
+ * @param state -
+ * @returns {ShallowWrappr}
+ */
+const setUp = (props={}, state=null)=>{
+    return shallow(<Increment {...props}/>);
+}
+
+/**
+ * Return a ShallowWrappe containing nodes with the given data-test value.
+ * @param {ShallowWrappr} wrapper
+ * @param {string} val
+ * @returns {ShallowWrapper}
+ */
+const findByTestAttr = (wrapper, val)=>{
+    return wrapper.find(`[data-test="${val}"]`);
+};
+
 
 test('Renders without error', ()=>{
-    const wrapper = shallow(<Increment/>);
-    expect(wrapper).toBeTruthy();
+    const wrapper = setUp()
     //Add a attribute based testing to not to distrub other app functionalities
-    const rootElement = wrapper.find("[data-test='component-increment']");
+    const rootElement = findByTestAttr(wrapper,'component-increment');
     expect(rootElement.length).toBe(1);
 });
 
 test('Renders increment button', ()=>{
-    const wrapper = shallow(<Increment/>);
+    const wrapper =setUp();
     //Add a attribute based testing to not to distrub other app functionalities
-    const rootElement = wrapper.find("[data-test='btn-increment']");
+    const rootElement = findByTestAttr(wrapper,'btn-increment');
     expect(rootElement.length).toBe(1);
 
 });
@@ -37,7 +57,7 @@ test('Renders increment button', ()=>{
 test('Renders Counter display', ()=>{
     const wrapper = shallow(<Increment/>);
     //Add a attribute based testing to not to distrub other app functionalities
-    const rootElement = wrapper.find("[data-test='counter-display']");
+    const rootElement = findByTestAttr(wrapper,'counter-display');
     expect(rootElement.length).toBe(1);
 });
 
